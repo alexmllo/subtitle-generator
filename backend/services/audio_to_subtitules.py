@@ -1,22 +1,35 @@
 import whisper
-import ffmpeg
+import os
 
 def audio_to_subtitles(input_path, output_path):
-    # Extraer audio del video
-    output_audio = input_path+"_audio.wav"
-
-    ffmpeg.input(input_path).output(output_audio, acodec="pcm_s16le", ar="16000").run()
+    print(input_path)
 
     # Load the Whisper model
     model = whisper.load_model("base")
 
+    print('model loaded')
+    # Delete the existing .srt file if it exists
+    if os.path.exists(output_path):
+        os.remove(output_path)
+        print(f"Deleted existing file: {output_path}")
+
     # Transcribe the audio file
-    result = model.transcribe(output_audio, fp16=False)
+    result = model.transcribe(input_path, fp16=False)
+    print('result transcribed')
+
+    # Check if transcription worked
+    if 'segments' not in result:
+        print("No subtitles generated!")
+        return
+
+    print('saving results')
 
     # Write the subtitles to a file
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding="utf-8") as f:
         for segment in result['segments']:
             start = segment['start']
             end = segment['end']
             text = segment['text']
             f.write(f"{start:.2f} --> {end:.2f}\n{text}\n\n")
+
+    #TODO, afegir qui es que parla

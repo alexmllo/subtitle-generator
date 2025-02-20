@@ -21,6 +21,12 @@ This is the backend component of the web application project. It is built using 
    pip install -r requirements.txt
    ```
 
+2. **Install ffmpeg**:
+   ```
+   Install ffmepg and make sure it is accessible from terminal
+   ```
+
+
 ## Usage
 
 To run the backend server, execute the following command:

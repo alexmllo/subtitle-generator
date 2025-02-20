@@ -7,3 +7,5 @@ numpy
 tensorflow
 torch
 transformers
+
+#ffmpeg ha d'estar instalat i afegit a l'entorn perque funcioni

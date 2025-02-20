@@ -1,56 +1,62 @@
-# Web Application Project
+# Subtitle Generator Project
 
-This project is a web application that consists of a Python backend server and a JavaScript frontend. Below are the details for setting up and running the project.
+This project is a web application that allows users to upload videos and generate subtitles in .srt format using AI. It consists of a backend service built with Flask and a frontend application built with React.
 
 ## Project Structure
 
 ```
-web-app-project
+subtitle-generator
 ├── backend
-│   ├── app.py
-│   ├── requirements.txt
-│   └── README.md
+│   ├── app.py                  # Entry point for the backend application
+│   ├── requirements.txt         # Python dependencies for the backend
+│   └── services
+│       └── subtitle_generator.py # Logic for generating subtitles from videos
 ├── frontend
-│   ├── index.html
-│   ├── styles
-│   │   └── style.css
-│   ├── scripts
-│   │   └── app.js
-│   └── README.md
-└── README.md
+│   ├── public
+│   │   └── index.html           # Main HTML file for the frontend
+│   ├── src
+│   │   ├── App.js               # Main component of the frontend application
+│   │   ├── components
+│   │   │   └── UploadButton.js   # Component for uploading video files
+│   │   └── styles
+│   │       └── App.css          # Styles for the frontend application
+│   ├── package.json             # Configuration file for npm
+└── README.md                    # Overall documentation for the project
 ```
 
-## Backend Setup
+## Setup Instructions
 
-1. Navigate to the `backend` directory:
-   ```
-   cd backend
-   ```
+### Backend
 
-2. Install the required dependencies:
+1. Navigate to the `backend` directory.
+2. Install the required Python packages:
    ```
    pip install -r requirements.txt
    ```
-
-3. Run the backend server:
+3. Run the backend application:
    ```
    python app.py
    ```
 
-## Frontend Setup
+### Frontend
 
-1. Navigate to the `frontend` directory:
+1. Navigate to the `frontend` directory.
+2. Install the required npm packages:
    ```
-   cd frontend
+   npm install
    ```
-
-2. Open `index.html` in a web browser to view the application.
+3. Start the frontend application:
+   ```
+   npm start
+   ```
 
 ## Usage
 
-- The backend server provides APIs that the frontend can interact with.
-- The frontend is responsible for the user interface and making requests to the backend.
+1. Open your web browser and go to `http://localhost:3000` to access the frontend application.
+2. Use the upload button to select a video file.
+3. The application will send the video to the backend for processing and generate subtitles.
+4. Once the subtitles are generated, you will be able to download the .srt file.
 
 ## Contributing
 
-Feel free to submit issues or pull requests for improvements or bug fixes.
+Feel free to contribute to this project by submitting issues or pull requests.

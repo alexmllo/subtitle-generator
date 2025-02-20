@@ -43,8 +43,38 @@ button:hover {
     background: #4cae4c;
 }
 
+button.loading{
+    pointer-events: none;
+    background: #addfad;
+}
+
 .message {
     text-align: center;
     margin-top: 20px;
     color: #d9534f;
 }
+
+input[type="file"] {
+  padding: 10px;
+  border: 2px solid #addfad;
+  border-radius: 5px;
+  background-color: #fafafa;
+  color: #333;
+  cursor: pointer;
+    width: 30rem;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background: #4cae4c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+    margin-right: 15px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #4cae4c;
+}
+

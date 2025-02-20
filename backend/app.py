@@ -1,12 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import os
-from services.subtitle_generator import generate_subtitles
+from services.audio_to_subtitules import audio_to_subtitles
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend", static_url_path="")
+
+tmpPath = 'C:/uploads'
 
 @app.route('/')
 def home():
-    return jsonify(message="Welcome to the Subtitle Generator web application!")
+    print("hi")
+    return send_from_directory(app.static_folder, "index.html")
 
 @app.route('/upload', methods=['POST'])
 def upload_video():
@@ -19,18 +22,16 @@ def upload_video():
         return jsonify(error="No selected file"), 400
 
     if video_file:
-        video_path = os.path.join('uploads', video_file.filename)
+        video_path = os.path.join(tmpPath, video_file.filename)
         video_file.save(video_path)
-        
-        subtitles = generate_subtitles(video_path)
-        
+
         srt_file_path = video_path.rsplit('.', 1)[0] + '.srt'
-        with open(srt_file_path, 'w') as srt_file:
-            srt_file.write(subtitles)
+
+        audio_to_subtitles(srt_file_path, srt_file_path)
 
         return jsonify(message="Subtitles generated successfully!", srt_file=srt_file_path), 200
 
 if __name__ == '__main__':
-    if not os.path.exists('uploads'):
-        os.makedirs('uploads')
+    if not os.path.exists(tmpPath):
+        os.makedirs(tmpPath)
     app.run(debug=True)
